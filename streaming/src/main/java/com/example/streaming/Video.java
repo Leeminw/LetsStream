@@ -1,23 +1,18 @@
 package com.example.streaming;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GeneratorType;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
-@Table(name="video_content")
+@Document(collection = "video_list")
 public class Video {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
+    public String id;
     private String title;
-
-    @Column
     private String url;
+
 }

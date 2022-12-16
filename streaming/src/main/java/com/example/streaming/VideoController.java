@@ -1,29 +1,27 @@
 package com.example.streaming;
 
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
-@RequestMapping("/video")
-@RequiredArgsConstructor
+@RequestMapping(path = "/video")
 public class VideoController {
 
     @Autowired
-    private VideoRepository videoRepository;
+    VideoService videoService;
 
+   
 
-
-
-    @GetMapping("/list")
-    public List<String> readAllVideoUrl(){
-        return videoRepository.getAllVideoUrl();
+    @GetMapping(value = "/find")
+    public String findVideoData(@RequestParam String title){
+        return videoService.selectVideo(title);
     }
+
 
 
 }
