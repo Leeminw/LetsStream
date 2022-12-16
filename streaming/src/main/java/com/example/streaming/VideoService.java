@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class VideoService {
 
@@ -26,4 +28,9 @@ public class VideoService {
             return "ERROR";
         }
     }
+
+    public List<Video> findAllVideos(){
+       return videoRepository.findAll();
+    }
+
 }

@@ -14,5 +14,6 @@ public class Video {
     public String id;
     private String title;
     private String url;
+    private String on;
 
 }
