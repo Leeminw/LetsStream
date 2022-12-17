@@ -27,7 +27,8 @@
             <tr>
 
                 <th>TITLE</th>
-                <th>URL</th>
+<!--                <th>URL</th>-->
+                <th>Description</th>
 
             </tr>
             </thead>
@@ -37,7 +38,8 @@
 
              <td><a th:href="@{/video/{videoTitle}(videoTitle=${video.title})}" th:text="${video.title}">영화제목</a></td>
 <!--                <td th:href="/video/{video.title}">TITLE</td>-->
-                <td th:text="${video.url}">URL</td>
+<!--                <td th:text="${video.url}">URL</td>-->
+                <td th:text="${video.description}">Description</td>
 
             </tr>
             </tbody>

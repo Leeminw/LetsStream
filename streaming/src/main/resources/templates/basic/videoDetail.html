@@ -1,49 +1,64 @@
-<!DOCTYPE HTML>
+
+
 <html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="utf-8">
-    <link href="../css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <style>
- .container {
- max-width: 560px;
- }
- </style>
+    <title>Hls.js demo - basic usage</title>
 </head>
+
 <body>
-<div class="container">
-    <div class="py-5 text-center">
-        <h2>비디오 상세</h2>
-    </div>
-    <div>
-        <label for="videoId">비디오 ID</label>
-        <input type="text" id="videoId" name="videoId" class="form-control"
-               value="1" th:value="${video.id}" readonly>
-    </div>
-    <div>
-        <label for="videoTitle">비디오 제목</label>
-        <input type="text" id="videoTitle" name="videTitle" class="form-control"
-               value="아무제목" th:value="${video.title}" readonly>
-    </div>
-    <div>
-        <label for="url">url</label>
-        <input type="text" id="url" name="url" class="form-control"
-               value="www.google.com" th:value="${video.url}" readonly>
-    </div>
-    <hr class="my-4">
-    <div class="row">
-        <div class="col">
-            <button class="w-100 btn btn-primary btn-lg"
-                    onclick="location.href='editForm.html'"
-                    th:onclick="|location.href='@{/basic/videos/{videoId}/edit(videoId=${video.id})}'|" type="button">상품 수정</button>
-        </div>
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg"
-                    onclick="location.href='videos.html'"
-                    th:onclick="|location.href='@{/basic/videos}'|"
-                    type="button">목록으로</button>
-        </div>
-    </div>
-</div> <!-- /container -->
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<center>
+
+
+    <video height="600" id="video" controls></video>
+</center>
+
+
+
+<div>
+    <h4 for="videoTitle">비디오 재생중</h4>
+    <input type="text" id="videoTitle" name="videTitle" class="form-control"
+           value="아무제목" th:value="${video.title}" readonly>
+    <input type="text" id="videoDecription" name="videDescription" class="form-control"
+           value="아무제목" th:value="${video.description}" readonly>
+</div>
+
+<script th:inline="javascript" >
+
+      var video_title= [[${video.title}]];
+      var video_url = [[${video.url}]];
+
+      console.log(video_title);
+      console.log(video_url);
+
+
+
+
+
+      var video = document.getElementById('video');
+      if (Hls.isSupported()) {
+        var hls = new Hls({
+          debug: true,
+        });
+        hls.loadSource(video_url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+          video.muted = true;
+          video.play();
+        });
+      }
+      // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+      // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+      // This is using the built-in support of the plain video element, without using hls.js.
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+        video.addEventListener('canplay', function () {
+          video.play();
+        });
+      }
+    </script>
 </body>
 </html>
