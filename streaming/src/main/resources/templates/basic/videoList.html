@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link  th:href="@{/css/bootstrap.min.css}"
+           href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>비디오 목록</h2>
+    </div>
+    <div class="row">
+        <div class="col">
+<!--            <button class="btn btn-primary float-end"-->
+<!--                    onclick="location.href='addForm.html'"-->
+<!--                    th:onclick="|location.href='@{/basic/items/add}'|"-->
+<!--                    type="button">상품-->
+<!--                등록</button>-->
+        </div>
+    </div>
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>TITLE</th>
+                <th>URL</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="video : ${videos}">
+<!--                <td><a href="videoDetail.html" th:href="@{/basic/videoList/{videoTitle}(videoTitle=${video.id})}" th:text="${video.id}">영화id</a></td>-->
+
+             <td><a th:href="@{/video/{videoTitle}(videoTitle=${video.title})}" th:text="${video.title}">영화제목</a></td>
+<!--                <td th:href="/video/{video.title}">TITLE</td>-->
+                <td th:text="${video.url}">URL</td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+ .container {
+ max-width: 560px;
+ }
+ </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>비디오 상세</h2>
+    </div>
+    <div>
+        <label for="videoId">비디오 ID</label>
+        <input type="text" id="videoId" name="videoId" class="form-control"
+               value="1" th:value="${video.id}" readonly>
+    </div>
+    <div>
+        <label for="videoTitle">비디오 제목</label>
+        <input type="text" id="videoTitle" name="videTitle" class="form-control"
+               value="아무제목" th:value="${video.title}" readonly>
+    </div>
+    <div>
+        <label for="url">url</label>
+        <input type="text" id="url" name="url" class="form-control"
+               value="www.google.com" th:value="${video.url}" readonly>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{/basic/videos/{videoId}/edit(videoId=${video.id})}'|" type="button">상품 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='videos.html'"
+                    th:onclick="|location.href='@{/basic/videos}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

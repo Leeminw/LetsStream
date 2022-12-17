@@ -16,4 +16,15 @@ public class Video {
     private String url;
     private String on;
 
+    public Video(){
+
+    }
+
+
+    public Video(String id, String title, String url, String on) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.on = on;
+    }
 }
